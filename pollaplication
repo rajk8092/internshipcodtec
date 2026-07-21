@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class PollApplication {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Poll Question: ");
+        String question = sc.nextLine();
+
+        Poll poll = new Poll(question);
+
+        System.out.print("Number of Options: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 1; i <= n; i++) {
+
+            System.out.print("Option " + i + ": ");
+            poll.addOption(sc.nextLine());
+        }
+
+        while (true) {
+
+            System.out.println("\n===== REAL-TIME POLL =====");
+            System.out.println("1. Vote");
+            System.out.println("2. View Live Results");
+            System.out.println("3. Exit");
+            System.out.print("Choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    poll.displayPoll();
+                    System.out.print("Select Option: ");
+                    poll.vote(sc.nextInt());
+                    break;
+
+                case 2:
+                    poll.showResults();
+                    break;
+
+                case 3:
+                    System.out.println("Thank You!");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid Choice.");
+            }
+        }
+    }
+}
